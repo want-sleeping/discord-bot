@@ -10,6 +10,7 @@ example:
     "keywords":"Enter your keyword about limbus translator"
 }
 ------------------------------------------------------------------
+(look at the code)
 (not include "-")
 
 lastly,enjoy your bot,Manager!!!
