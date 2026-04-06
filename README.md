@@ -12,6 +12,6 @@ example:
 ------------------------------------------------------------------
 (look at the code)
 (not include "-")
-
-I maybe add some request link,give role etc later.\n
+------------------------------------------------------------------
+I maybe add some request link,give role etc later.
 lastly,enjoy your bot,Manager!!!
