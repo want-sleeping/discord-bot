@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from discord import app_commands
+from discord.app_commands import Choice
 
 class Slash_Commands(commands.Cog):
     def __init__(self, bot: commands.Bot):
