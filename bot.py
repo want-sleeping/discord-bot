@@ -9,7 +9,7 @@ with open("settings.json", mode = "r", encoding="utf-8") as jfile:
 
 intents = discord.Intents.default()
 intents.message_content = True
-bot = commands.Bot(command_prefix = "$", intents = intents, owner_id = 885422815518548008)
+bot = commands.Bot(command_prefix = "$", intents = intents)
 
 @bot.event
 async def on_ready():
