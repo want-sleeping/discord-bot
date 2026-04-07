@@ -7,9 +7,6 @@ import discord
 with open("settings.json", mode = "r", encoding="utf-8") as jfile:
     data = json.load(jfile)
 
-channel_id = data["channel_id"]
-lucky_number = random.randint(1, 100)
-
 class Daily_Morning(commands.Cog):
 
     tz_hk = datetime.timezone(datetime.timedelta(hours=8))
@@ -19,30 +16,43 @@ class Daily_Morning(commands.Cog):
 
     def __init__(self, bot: commands.Bot):
         self.bot = bot
+
+    async def cog_load(self):
         self.everyday.start()
         self.everyday_hk.start()
 
     @tasks.loop(time=everyday_time)
     async def everyday(self):
-        channel = self.bot.get_channel(channel_id)
-        embed = discord.Embed(
-            title="【 Don Quixote Adventure 】",
-            description="Good morning! It's a new day! Is time to start a new adventure!",
-            color=discord.Color.blue(),
-            timestamp = datetime.datetime.now(self.tz)
+        try:
+            channel = self.bot.get_channel(data["channel_id"])
+            embed = discord.Embed(
+                title="【 Don Quixote Adventure 】",
+                description="Good morning! It's a new day! Is time to start a new adventure!",
+                color=discord.Color.blue(),
+                timestamp = datetime.datetime.now(self.tz)
         )
-        await channel.send(embed=embed)
+            await channel.send(embed=embed)
+        except Exception as e:
+            print(f"An error occurred: {e}")
 
     @tasks.loop(time=everyday_time_hk)
     async def everyday_hk(self):
-        channel = self.bot.get_channel(channel_id)
-        embed_hk = discord.Embed(
+        try:
+            lucky_number = random.randint(1, 100)
+            channel = self.bot.get_channel(data["channel_id"])
+            embed_hk = discord.Embed(
             title="【 Don Quixote Adventure 】",
             description="Good morning! It's a new day in h.k! Is time to start a new adventure! " + f"(Today's lucky number for today is {lucky_number}.)",
             color=discord.Color.blue(),
             timestamp = datetime.datetime.now(self.tz_hk)
         )
-        await channel.send(embed=embed_hk)
+            await channel.send(embed=embed_hk)
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
+    @everyday_hk.before_loop
+    async def before_everyday_hk(self):
+        await self.bot.wait_until_ready()
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(Daily_Morning(bot))
