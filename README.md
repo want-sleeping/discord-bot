@@ -15,3 +15,4 @@ example:
 ------------------------------------------------------------------
 I maybe add some request link,give role etc later.
 Lastly,enjoy your bot,Manager!!!
+(Version 1.0)
